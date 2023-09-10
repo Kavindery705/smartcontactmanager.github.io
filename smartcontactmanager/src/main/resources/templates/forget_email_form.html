@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<section>
+<div id="login">
+        <div class="container" >
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+						<div th:if="${session.message}" th:classappend="${session.message.type}"
+						class="alert  alert-dismissible fade show m-4" role="alert">
+						<p th:text="${session.message.content}"></p>
+						<th:block th:text="${@sessionHelper.removeMessageFromSession()}"></th:block>
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					</div>
+                    <div id="login-box" class="col-md-12" style="height: 200px;">
+						<h3 class="text-center m-3">Your Register Email</h3>
+						<form th:action="@{/send-otp}" method="post" >
+							<div class="form-group" >
+								
+								<input required type="email" name="email" placeholder="Enter email here" class="form-control" />
+							</div>
+							<div class="container text-center">
+								<button type="submit" class="btn btn-warning mt-2">Send Otp</button>
+							</div>
+						</form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+		
+	</section>
+</body>
+</html>

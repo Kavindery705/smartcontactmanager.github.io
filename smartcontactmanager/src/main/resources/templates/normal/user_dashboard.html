@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="normal/normalbase::layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<section>
+		<div class="container ">
+			<div class="card">
+				<div class="card-body">
+						<div th:if="${session.message}" th:classappend="${session.message.type}"
+						class="alert  alert-dismissible fade show" role="alert">
+						<p th:text="${session.message.content}"></p>
+						<th:block th:text="${@sessionHelper.removeMessageFromSession()}"></th:block>
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					</div>
+					<div class="container text-center">
+					<img class="my_profile_detail " th:src="@{'/image/userprofile.png'}" alt="profile photo"/>
+					</div>
+					<h1 class="text-center mt-2 text-secondary">
+						Start Adding your contact in Smart Contact Manager 
+					</h1>
+					<a th:href="@{/user/add-contact}" class="btn btn-block btn-primary text-uppercase mt-3">Add new contact</a>
+				<hr />
+				<h2>Donate Us</h2>
+					<input id="payment_field" type="number" class="form-control my-2" placeholder="Enter amount here" />
+					<div class="container text-center mt-4">
+						<div onclick="paymentStart()" class="btn btn-success btn-block">Pay</div>
+					</div>
+			</div>
+				</div>
+			
+		</div>
+	<script>
+		$(document).ready(()=>{
+		$('.item').removeClass('active');
+		$('#home-link').addClass('active')			
+		});
+	</script>
+	</section>
+</body>
+</html>

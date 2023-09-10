@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="normal/normalbase::layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel="stylesheet" href="sweetalert2.min.css">	
+<script src="sweetalert2.all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+	<section>
+		<div class="card mr-2 mt-2" th:if="${user}">
+			<div class="card-body" >
+				
+				<div class="container text-center">
+					
+					<img class="my_profile_detail" th:src="@{'/image/'+${user.imageurl}}" alt="profile photo"/>
+					<h1 > <span th:text="${user.uname}"></span> </h1>
+					<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#ID</th>
+      <th scope="col" th:text="${'SCM2023'+user.uid}"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Email</th>
+      <td><span th:text="${user.uemail}"></span></td>
+    </tr>
+  <!--<tr>
+      <th scope="row">Phone</th>
+      <td><span th:text="${user.uphone}"></span></td>
+    </tr>-->
+    <tr>
+      <th scope="row">Role</th>
+      <td><span th:text="${user.role}"></span></td>
+    </tr>
+    <tr>
+      <th scope="row">Account active</th>
+      <td><span th:text="${user.enabled}"></span></td>
+    </tr>
+  </tbody>
+  
+</table>
+<div class="description mt-2">
+	<th:block th:utext="${user.about}"></th:block>
+	
+</div>
+<div class="container text-center mt-2">
+	<a href="#" th:attr="onclick=|deleteProfile(${user.uid})|" class="btn btn-block btn-danger">Delete</a>
+	<form th:action="@{'/user/update-profile/'+${user.uid}}" method="post" class="mt-2">
+		  <button type="submit" class="btn  btn-block btn-primary" >Update</button>
+		  </form>
+	
+</div>
+				</div>
+				
+				
+			</div>
+			
+		</div>
+			<h1 class="text-center" th:unless="${user}">You don't have permission to see this user!*!</h1>
+		
+	<script>
+		$(document).ready(()=>{
+		$('.item').removeClass('active');
+		$('#profile-link').addClass('active')			
+		})
+	</script>
+	</section>
+</body>
+</html>
